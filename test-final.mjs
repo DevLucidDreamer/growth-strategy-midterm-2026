@@ -37,5 +37,5 @@ restored.run("practiceLevel='unseen'");restored.click('answer',restored.run(`QMA
 restored.location.hash='#final-practice-all';restored.run('render()');restored.run("practiceLevel='all'");
 const seen=new Set();for(let i=0;i<ids.length;i++){const id=restored.run('practice.ids[practice.index]');assert(!seen.has(id));seen.add(id);restored.click('answer',restored.run(`QMAP.get('${id}').answer`));restored.click('practice-next');}
 assert.equal(restored.run('practice.cycle'),2);assert(restored.run('practice.ids.every(id=>FINAL_IDS.includes(id))'));
-restored.location.hash='#infinite';restored.run('render()');assert.equal(restored.run('practice.ids.length'),630);
+restored.location.hash='#infinite';restored.run('render()');assert.equal(restored.run('practice.ids.length'),750);
 console.log(`PASS: 18 reported topics; ${ids.length} curated questions; no extra case/date questions; all topic routes; MC/OX filters; immediate grading; existing wrong-note integration; reload resume; final-only cycle and global-pool isolation.`);

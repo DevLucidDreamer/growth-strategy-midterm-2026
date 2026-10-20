@@ -8,7 +8,7 @@ function harness(data=new Map(),hash='#final-exam'){
  for(const p of ['questions.js','study-data.js','app.js','comprehensive.js','final-review.js','final-exam.js'])vm.runInContext(fs.readFileSync(p,'utf8'),ctx);
  return {data,el,location,run:s=>vm.runInContext(s,ctx),click:(action,n=0)=>events.click.forEach(fn=>fn({target:{closest:()=>({dataset:{action,n:String(n)},disabled:false})}}))};
 }
-const h=harness();assert(h.el('#app').innerHTML.includes('최종 실전 모의고사'));assert.equal(h.run('BANK.length'),630);
+const h=harness();assert(h.el('#app').innerHTML.includes('최종 실전 모의고사'));assert.equal(h.run('BANK.length'),750);
 for(const mode of ['mc','mixed'])for(let i=0;i<100;i++){
  const qs=h.run(`feBlueprint('${mode}')`);assert.equal(qs.length,30);assert.equal(new Set(qs.map(q=>q.id)).size,30);
  assert.equal(qs.filter(q=>q.type==='mc').length,mode==='mc'?30:24);assert.equal(qs.filter(q=>q.type==='ox').length,mode==='mc'?0:6);
@@ -39,4 +39,4 @@ reportReload.run('finalExamState.current.questions.forEach(q=>finalExamState.cur
 reportReload.click('fe-history',0);assert(reportReload.el('#app').innerHTML.includes('20문항 오답'));
 reportReload.run("feCreate('mc')");reportReload.click('fe-answer',0);reportReload.click('fe-history',0);reportReload.click('fe-retry');assert(reportReload.el('#app').innerHTML.includes('진행 중인 최종 시험'));assert.equal(reportReload.run('finalExamState.current.mode'),'mc');reportReload.click('fe-replace',2);assert.equal(reportReload.run('finalExamState.current.questions.length'),20);assert.equal(reportReload.run('finalExamState.current.mode'),'retry');
 reportReload.run("for(let i=0;i<12;i++){feCreate('mc');feSubmit()}");assert.equal(reportReload.run('finalExamState.history.length'),10);
-console.log('PASS: 200 topic-balanced blueprints; 30 MC / 24+6 mixed; mandatory reported examples; answer secrecy; navigation/flags; reload-stable shuffled choices; replacement guard; scoring/unanswered; original-answer remapping; history persistence; wrong-only retest; 10-record limit; existing 630 bank unchanged.');
+console.log('PASS: 200 topic-balanced blueprints; 30 MC / 24+6 mixed; mandatory reported examples; answer secrecy; navigation/flags; reload-stable shuffled choices; replacement guard; scoring/unanswered; original-answer remapping; history persistence; wrong-only retest; 10-record limit; existing 750 bank unchanged.');

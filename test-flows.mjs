@@ -24,10 +24,10 @@ for(let i=0;i<20;i++){const a=run('BANK.find(q=>q.id===practice.ids[practice.ind
 assert.equal(run('Object.keys(saved.wrong).length'),0);
 // Complete a full shuffled bank, ensuring unique questions and safe next cycle.
 location.hash='#infinite';run('startPractice(false)');const seen=new Set();
-for(let i=0;i<630;i++){const id=run('practice.ids[practice.index]');assert(!seen.has(id));seen.add(id);const a=run('BANK.find(q=>q.id===practice.ids[practice.index]).answer');click('answer',a);const before=run('saved.practice.answered');click('answer',a);assert.equal(run('saved.practice.answered'),before);click('practice-next');}
-assert.equal(seen.size,630);assert.equal(run('practice.cycle'),2);assert.equal(run('practice.index'),0);assert.equal(run('new Set(practice.ids).size'),630);
+for(let i=0;i<750;i++){const id=run('practice.ids[practice.index]');assert(!seen.has(id));seen.add(id);const a=run('BANK.find(q=>q.id===practice.ids[practice.index]).answer');click('answer',a);const before=run('saved.practice.answered');click('answer',a);assert.equal(run('saved.practice.answered'),before);click('practice-next');}
+assert.equal(seen.size,750);assert.equal(run('practice.cycle'),2);assert.equal(run('practice.index'),0);assert.equal(run('new Set(practice.ids).size'),750);
 run("startPractice(false,'5')");assert(run('practice.ids.every(id=>BANK.find(q=>q.id===id).week===5)'));
-console.log('PASS: hidden exam answers; stored progress; scoring including unanswered; 20 wrong retries; 630-question no-repeat cycle; reshuffle rollover; duplicate answer prevention; week filter.');
+console.log('PASS: hidden exam answers; stored progress; scoring including unanswered; 20 wrong retries; 750-question no-repeat cycle; reshuffle rollover; duplicate answer prevention; week filter.');
 // Weekly routes must isolate all six pools, score immediately and retain their pool after rollover.
 location.hash='#weekly';run('render()');
 for(let w=2;w<=7;w++)assert(element('#app').innerHTML.includes(`href="#week-${w}"`));
@@ -48,8 +48,8 @@ for(let w=2;w<=7;w++){
  assert.equal(run('practice.cycle'),2);
  assert(run(`practice.ids.every(id=>BANK.find(q=>q.id===id).week===${w})`));
 }
-assert.equal(weekTotal,630);
-console.log('PASS: weekly selection, all 6 route pools totaling 630 questions, immediate grading and weekly-only shuffle rollover.');
+assert.equal(weekTotal,750);
+console.log('PASS: weekly selection, all 6 route pools totaling 750 questions, immediate grading and weekly-only shuffle rollover.');
 
 // New audit, recall and filter behavior, including preserved legacy progress.
 location.hash='#coverage';run('render()');assert(element('#app').innerHTML.includes('151쪽'));
@@ -68,10 +68,10 @@ for(let i=0;i<100;i++){
  assert.equal(new Set(ids).size,30);assert.equal(questions.filter(q=>q.type==='mc').length,15);assert.equal(questions.filter(q=>q.type==='ox').length,15);
  for(let w=2;w<=7;w++)for(const t of ['mc','ox'])assert(questions.filter(q=>q.week===w&&q.type===t).length>=2);
 }
-location.hash='#cards';run('render()');assert(element('#app').innerHTML.includes('441장'));
+location.hash='#cards';run('render()');assert(element('#app').innerHTML.includes('561장'));
 assert(!element('#app').innerHTML.includes('flash-answer'));click('card-flip');assert(element('#app').innerHTML.includes('flash-answer'));
 click('card-known');assert.equal(run('Object.keys(saved.cardKnown).length'),1);
-run("cardMode='unknown'");assert.equal(run('activeCards().length'),440);
+run("cardMode='unknown'");assert.equal(run('activeCards().length'),560);
 click('card-reset');assert.equal(run('Object.keys(saved.cardKnown).length'),1);click('card-confirm-reset');assert.equal(run('Object.keys(saved.cardKnown).length'),0);
 run('saved.attempts={};saved.wrong={};practiceLevel="all";startPracticeState(false,"p5-20")');
 location.hash='#page-5-20';run('render()');
