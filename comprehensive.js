@@ -74,7 +74,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-action]');
   if(a==='card-known'||a==='card-again'){if(a==='card-known')saved.cardKnown[c.id]=true;else delete saved.cardKnown[c.id];if(cardMode==='all'||a==='card-again')cardIndex=(cardIndex+1)%cs.length;cardReveal=false;persist();}
   render();
  }
- if(a==='practice-next'&&practiceLevel==='unseen'&&!practice.review&&practice.index===0&&practice.cycle>1){startPracticeState(false,practice.filter);render();}
+ if(a==='practice-next'&&practiceLevel==='unseen'&&!practice.review&&practice.view!=='final'&&practice.index===0&&practice.cycle>1){startPracticeState(false,practice.filter);render();}
  if(['answer','practice-next'].includes(a))persist();
 });
 document.addEventListener('change',e=>{const id=e.target.id,value=e.target.value;
