@@ -17,7 +17,7 @@ const semesterLastWeek = SEMESTER_WEEKS.at(-1).week;
 const semesterScope = semesterFirstWeek === semesterLastWeek
   ? `${semesterFirstWeek}주차` : `${semesterFirstWeek}~${semesterLastWeek}주차`;
 const semesterMockSize = {mc: 30, ox: 10};
-const semesterCornellDownload = '<a class="btn secondary" href="output/pdf/final-cornell-notes.pdf" download="기말고사 코넬 노트 9-11주차.pdf">코넬 노트 PDF 다운로드</a>';
+const semesterCornellDownload = '<a class="btn secondary" href="output/pdf/final-cornell-notes.pdf?v=20261113-barunpen" download="기말고사 코넬 노트 9-11주차.pdf">코넬 노트 PDF 다운로드</a>';
 let semesterState = {practice: {}, current: null, history: [], wrong: {}, attempts: {}};
 let semesterResultIndex = 0;
 let semesterRetry = null;
